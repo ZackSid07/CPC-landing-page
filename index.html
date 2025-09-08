@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Club Events • Dark Theme</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./CSS/style.css">
+
+</head>
+
+<body>
+    <div class="floating-elements">
+        <div class="floating-element" style="width: 50px; height: 50px; top: 10%; left: 5%; animation-duration: 25s;"></div>
+        <div class="floating-element" style="width: 30px; height: 30px; top: 20%; left: 80%; animation-duration: 20s; animation-delay: -5s;"></div>
+        <div class="floating-element" style="width: 70px; height: 70px; top: 50%; left: 60%; animation-duration: 30s; animation-delay: -10s;"></div>
+        <div class="floating-element" style="width: 40px; height: 40px; top: 70%; left: 10%; animation-duration: 22s; animation-delay: -15s;"></div>
+        <div class="floating-element" style="width: 60px; height: 60px; top: 30%; left: 40%; animation-duration: 28s; animation-delay: -7s;"></div>
+    </div>
+
+    <nav class="nav">
+        <div class="container nav-inner">
+            <a class="brand" href="#"><span class="dot"></span><span>Club Events</span></a>
+            <ul>
+                <li><a href="#events">Events</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <img class="hero-img" src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Club activities" />
+        <div class="hero-content container">
+            <div>
+                <span class="badge">Upcoming • Fall Season</span>
+                <h1>Where campus life meets unforgettable events.</h1>
+                <p>Workshops, hackathons, cultural nights, and community drives—organized the classic way, executed with modern flair.</p>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="events" class="section container">
+            <div class="events-header">
+                <h2>All Events</h2>
+                <span class="muted">Choose from our exciting lineup of activities</span>
+            </div>
+            <div class="event-buttons">
+                <button class="chip active"><span class="dot"></span> All Events</button>
+                <button class="chip"><span class="dot"></span> Quiz Contest</button>
+                <button class="chip"><span class="dot"></span> Programming</button>
+                <button class="chip"><span class="dot"></span> CTF Contest</button>
+                <button class="chip"><span class="dot"></span> Workshops</button>
+                <button class="chip"><span class="dot"></span> Presentations</button>
+                <button class="chip"><span class="dot"></span> Projects</button>
+                <button class="chip"><span class="dot"></span> Film Shows</button>
+                <button class="chip"><span class="dot"></span> Gaming</button>
+            </div>
+            <div class="cards">
+                <article class="card">
+                    <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?q=80&w=600" alt="Quiz Contest" />
+                    <div class="card-body">
+                        <h3>Quiz Contest</h3>
+                        <div class="meta"><i class="far fa-calendar"></i> Sep 12 • <i class="far fa-clock"></i> 2:00 PM • <i class="fas fa-map-marker-alt"></i> Hall A</div>
+                        <p>Test your knowledge in our annual trivia competition with exciting prizes for winners.</p>
+                        <div class="actions">
+                            <a class="btn" href="#"><span>Details</span> <i class="fas fa-arrow-right"></i></a>
+                            <a class="btn" href="#"><span>Register</span> <i class="fas fa-ticket-alt"></i></a>
+                        </div>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=600" alt="Programming Contest" />
+                    <div class="card-body">
+                        <h3>Programming Contest</h3>
+                        <div class="meta"><i class="far fa-calendar"></i> Sep 20 • <i class="far fa-clock"></i> 10:00 AM • <i class="fas fa-map-marker-alt"></i> Lab 2</div>
+                        <p>Compete against the best coders in this intense algorithm and problem-solving challenge.</p>
+                        <div class="actions">
+                            <a class="btn" href="#"><span>Details</span> <i class="fas fa-arrow-right"></i></a>
+                            <a class="btn" href="#"><span>Register</span> <i class="fas fa-ticket-alt"></i></a>
+                        </div>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=600" alt="CTF Contest" />
+                    <div class="card-body">
+                        <h3>Catch The Flag (CTF) Contest</h3>
+                        <div class="meta"><i class="far fa-calendar"></i> Sep 25 • <i class="far fa-clock"></i> 12:00 PM • <i class="fas fa-map-marker-alt"></i> Cyber Lab</div>
+                        <p>Put your cybersecurity skills to the test in our popular Capture The Flag competition.</p>
+                        <div class="actions">
+                            <a class="btn" href="#"><span>Details</span> <i class="fas fa-arrow-right"></i></a>
+                            <a class="btn" href="#"><span>Register</span> <i class="fas fa-ticket-alt"></i></a>
+                        </div>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="image/Tech.jpeg" alt="Technical Workshop & Keynotes"/>
+                    <div class="card-body">
+                        <h3>Technical Workshop & Keynotes</h3>
+                        <div class="meta"><i class="far fa-calendar"></i> Oct 05 • <i class="far fa-clock"></i> 9:00 AM • <i class="fas fa-map-marker-alt"></i> Auditorium B</div>
+                        <p>Learn from industry experts in this full-day workshop covering emerging technologies.</p>
+                        <div class="actions">
+                            <a class="btn" href="#"><span>Details</span> <i class="fas fa-arrow-right"></i></a>
+                            <a class="btn" href="#"><span>Register</span> <i class="fas fa-ticket-alt"></i></a>
+                        </div>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="image/GroupPresentation.jpg" alt="Group Presentation" />
+                    <div class="card-body">
+                        <h3>Group Presentation</h3>
+                        <div class="meta"><i class="far fa-calendar"></i> Oct 12 • <i class="far fa-clock"></i> 3:00 PM • <i class="fas fa-map-marker-alt"></i> Seminar Room</div>
+                        <p>Showcase your research and projects to peers and faculty in our collaborative session.</p>
+                        <div class="actions">
+                            <a class="btn" href="#"><span>Details</span> <i class="fas fa-arrow-right"></i></a>
+                            <a class="btn" href="#"><span>Register</span> <i class="fas fa-ticket-alt"></i></a>
+                        </div>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="image/projectshowcasing.jpg" alt="Project Showcasing" />
+                    <div class="card-body">
+                        <h3>Project Showcasing</h3>
+                        <div class="meta"><i class="far fa-calendar"></i> Oct 18 • <i class="far fa-clock"></i> 11:00 AM • <i class="fas fa-map-marker-alt"></i> Exhibition Hall</div>
+                        <p>Display your innovative projects and get feedback from industry professionals.</p>
+                        <div class="actions">
+                            <a class="btn" href="#"><span>Details</span> <i class="fas fa-arrow-right"></i></a>
+                            <a class="btn" href="#"><span>Register</span> <i class="fas fa-ticket-alt"></i></a>
+                        </div>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="https://images.unsplash.com/photo-1505685296765-3a2736de412f?q=80&w=600" alt="Short Film Show" />
+                    <div class="card-body">
+                        <h3>Short Film Show</h3>
+                        <div class="meta"><i class="far fa-calendar"></i> Oct 25 • <i class="far fa-clock"></i> 6:00 PM • <i class="fas fa-map-marker-alt"></i> Open Air Theater</div>
+                        <p>Enjoy an evening of creative short films produced by our talented student filmmakers.</p>
+                        <div class="actions">
+                            <a class="btn" href="#"><span>Details</span> <i class="fas fa-arrow-right"></i></a>
+                            <a class="btn" href="#"><span>Register</span> <i class="fas fa-ticket-alt"></i></a>
+                        </div>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=600" alt="Gaming Contest" />
+                    <div class="card-body">
+                        <h3>Gaming Contest</h3>
+                        <div class="meta"><i class="far fa-calendar"></i> Nov 02 • <i class="far fa-clock"></i> 4:00 PM • <i class="fas fa-map-marker-alt"></i> Gaming Zone</div>
+                        <p>Compete in our popular gaming tournament featuring popular esports titles.</p>
+                        <div class="actions">
+                            <a class="btn" href="#"><span>Details</span> <i class="fas fa-arrow-right"></i></a>
+                            <a class="btn" href="#"><span>Register</span> <i class="fas fa-ticket-alt"></i></a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="about" class="section container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>About Us</h2>
+                    <p>We're a student-run club that believes in organization and execution. Our mission is to create memorable experiences through well-planned events that bring together students from all disciplines.</p>
+                    <p>Founded in 2015, we've grown from a small group of enthusiasts to one of the largest student organizations on campus, with over 500 active members and dozens of successful events each year.</p>
+                    <div class="about-stats">
+                        <div class="stat">
+                            <div class="stat-number">500+</div>
+                            <div class="stat-label">Active Members</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Events Yearly</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">8</div>
+                            <div class="stat-label">Years Running</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">12</div>
+                            <div class="stat-label">Committees</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="About Club Events">
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section container">
+            <div class="events-header">
+                <h2>Contact Us</h2>
+                <span class="muted">Get in touch with our team for any inquiries</span>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email Us</h3>
+                            <p>club@example.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Call Us</h3>
+                            <p>+880 1XXX-XXXXXX</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Visit Us</h3>
+                            <p>Student Union Building, Room 305<br>University Campus</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Office Hours</h3>
+                            <p>Monday - Friday: 10AM - 4PM<br>Saturday: 12PM - 3PM</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Send a Message</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="Enter your name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" class="form-control" placeholder="What is this regarding?">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" class="form-control" placeholder="Type your message here..."></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message <i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="scroll-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <a href="#" class="footer-logo"><span class="dot"></span><span>Club Events</span></a>
+                <div class="footer-links">
+                    <a href="#events">Events</a>
+                    <a href="#about">About</a>
+                    <a href="#contact">Contact</a>
+                    <a href="#">Gallery</a>
+                    <a href="#">Blog</a>
+                    <a href="#">FAQ</a>
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+                <div class="copyright">© <span id="y"></span> Club Events. All rights reserved.</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current year in footer
+            document.getElementById('y').textContent = new Date().getFullYear();
+            
+            // Scroll to top button
+            const scrollBtn = document.querySelector('.scroll-top');
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    scrollBtn.classList.add('active');
+                } else {
+                    scrollBtn.classList.remove('active');
+                }
+            });
+            
+            scrollBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Animation on scroll for sections
+            const sections = document.querySelectorAll('.section');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // Animation on scroll for cards
+            const cards = document.querySelectorAll('.card');
+            
+            const cardObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, index * 100);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            cards.forEach(card => {
+                cardObserver.observe(card);
+            });
+            
+            // Chip filter functionality
+            const chips = document.querySelectorAll('.chip');
+            
+            chips.forEach(chip => {
+                chip.addEventListener('click', () => {
+                    chips.forEach(c => c.classList.remove('active'));
+                    chip.classList.add('active');
+                    
+                    // Here you would typically filter the cards
+                    // For this example, we'll just add a simple animation
+                    cards.forEach(card => {
+                        card.classList.remove('visible');
+                        setTimeout(() => {
+                            card.classList.add('visible');
+                        }, 300);
+                    });
+                });
+            });
+            
+            // Hamburger menu toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav ul');
+            
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+            
+            // Form submission
+            const contactForm = document.querySelector('.contact-form form');
+            
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // Simple form validation
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+                
+                if (name && email && message) {
+                    // Here you would typically send the form data to a server
+                    alert('Thank you for your message! We will get back to you soon.');
+                    contactForm.reset();
+                } else {
+                    alert('Please fill in all required fields.');
+                }
+            });
+            
+            // Parallax effect for hero image
+            const heroImg = document.querySelector('.hero-img');
+            
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const rate = scrolled * -0.5;
+                heroImg.style.transform = `scale(1.1) translateY(${rate}px)`;
+            });
+        });
+    </script>
+</body>
+
+</html>
