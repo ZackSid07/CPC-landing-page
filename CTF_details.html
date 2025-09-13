@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capture the Flag (CTF) Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./CSS/style.css">
+    <style>
+        :root {
+            --bg: #0b0f14;
+            --panel: #111822;
+            --panel-2: #0e1520;
+            --text: #ffffff;
+            --muted: #b0b6c0;
+            --accent: #5dd3ff;
+            --accent-2: #7c5cff;
+            --border: rgba(255, 255, 255, 0.15);
+            --shadow: 0 10px 30px rgba(0, 0, 0, .55);
+            --radius: 14px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, Roboto, Helvetica, Arial;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: min(1200px, 92vw);
+            margin-inline: auto;
+        }
+
+        .section {
+            padding: 80px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Floating Background Elements */
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            animation: float 25s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+            }
+
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+            }
+        }
+
+        /* Hero Header */
+        .hero-header {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding: 40px 20px;
+            background-image: url('https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(11, 15, 20, 0.85) 0%, rgba(11, 15, 20, 0.95) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content h1 {
+            font-size: clamp(36px, 6vw, 60px);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(to right, var(--accent), var(--accent-2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            color: var(--muted);
+            max-width: 65ch;
+            margin-inline: auto;
+            margin-bottom: 30px;
+        }
+
+        /* --- CENTERED SPONSORS SECTION STYLING --- */
+
+        /* 
+  This is the main wrapper for the entire sponsor block.
+  Setting a max-width and margin auto is what centers it on the page.
+*/
+        .sponsors-wrapper {
+            max-width: 1000px;
+            /* Adjust this width as needed */
+            margin-inline: auto;
+            /* This centers the wrapper */
+            padding: 20px 0px;
+            text-align: center;
+        }
+
+        /* Styles for the section's header */
+        .sponsor-header h2 {
+            font-size: 28px;
+            color: var(--text);
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .sponsor-header p {
+            color: var(--muted);
+            margin-bottom: 40px;
+            /* Space between subtitle and sponsor cards */
+        }
+
+        /* 
+  We use flexbox here to ensure the cards are perfectly centered in a row.
+  This is more effective for a single row than a grid.
+*/
+        .sponsors-grid {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            /* Allows cards to stack on small screens */
+        }
+
+        /* 
+  The individual card for each sponsor.
+  We set a specific width to keep them uniform.
+*/
+        .sponsor-card {
+            background: var(--panel-2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 25px;
+            width: 280px;
+            /* Fixed width for each card */
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .sponsor-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(93, 211, 255, 0.15);
+        }
+
+        /* Styles the text above the logo (e.g., "Powered by") */
+        .sponsor-card .sponsor-role {
+            text-transform: uppercase;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--muted);
+            letter-spacing: 0.8px;
+            margin-bottom: 15px;
+        }
+
+        /* Base styling for all sponsor logos */
+        .sponsor-card .sponsor-logo {
+            max-height: 60px;
+            /* Adjust height for visibility */
+            width: auto;
+            max-width: 70%;
+            margin-inline: auto;
+        }
+
+        /* 
+  Crucial style for the DSI logo with a white background.
+  It inverts the colors to blend with the dark theme.
+*/
+        /* .dsi-logo {
+            filter: invert(1);
+        } */
+
+        /* Rounds the corners of any JPEG/solid background logos */
+        .rounded-logo {
+            border-radius: 8px;
+        }
+
+        .event-content {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 40px;
+        }
+
+        .detail-section h2 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .detail-section h2 i {
+            color: var(--accent);
+            font-size: 28px;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .detail-item {
+            background: var(--panel-2);
+            padding: 25px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .detail-item:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 0 25px rgba(93, 211, 255, 0.2);
+        }
+
+        .detail-item h3 {
+            font-size: 20px;
+            color: var(--accent-2);
+            margin-bottom: 10px;
+        }
+
+        .detail-item p {
+            color: var(--muted);
+            font-size: 16px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            background: var(--panel);
+            padding: 50px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+        }
+
+        .cta-section h2 {
+            margin-bottom: 15px;
+        }
+
+        .cta-section p {
+            color: var(--muted);
+            margin-bottom: 30px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(to right, var(--accent), var(--accent-2));
+            color: var(--bg);
+            border-radius: var(--radius);
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: var(--transition);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Timeline / Schedule */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--border);
+        }
+
+        .timeline-item {
+            margin-bottom: 30px;
+            position: relative;
+            padding-left: 60px;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 5px;
+            top: 5px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--panel);
+            border: 3px solid var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .timeline-dot i {
+            color: var(--accent);
+        }
+
+        .timeline-content {
+            background: var(--panel-2);
+            padding: 20px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+        }
+
+        .timeline-time {
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--accent-2);
+            margin-bottom: 8px;
+        }
+
+        .timeline-description {
+            color: var(--muted);
+        }
+
+        /* Prizes */
+        .prizes {
+            text-align: center;
+        }
+
+        .prize-cards {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .prize-card {
+            background: var(--panel-2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 30px;
+            width: 320px;
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .prize-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            transition: var(--transition);
+        }
+
+        .prize-card.champion::before {
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        }
+
+        .prize-card.runner-up-1::before {
+            background: var(--accent-2);
+        }
+
+        .prize-card.runner-up-2::before {
+            background: var(--accent);
+        }
+
+        .prize-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+            border-color: var(--accent-2);
+        }
+
+        .prize-card h3 {
+            font-size: 22px;
+            color: var(--muted);
+            margin-bottom: 15px;
+        }
+
+        .prize-card .amount {
+            font-size: 40px;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--accent), var(--accent-2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* =================================================================
+   RESPONSIVE DESIGN FOR ALL DEVICES
+   ================================================================= */
+
+/* --- Tablet Devices (e.g., iPads @ up to 1024px) --- */
+@media (max-width: 1024px) {
+    .detail-grid {
+        /* Adjusts grid for better fit on tablets */
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+
+/* --- Mobile Devices (e.g., iPhones, Android Phones @ up to 768px) --- */
+@media (max-width: 768px) {
+
+    /* Reduce padding on all sections for more space on mobile */
+    .section {
+        padding: 60px 0;
+    }
+
+    /* --- Mobile Navigation --- */
+    .nav ul {
+        display: none; /* Hide the desktop nav links by default */
+        position: absolute;
+        top: 100%; /* Position it right below the nav bar */
+        left: 0;
+        width: 100%;
+        background: var(--panel);
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    /* This class will be toggled by JavaScript to show the menu */
+    .nav ul.active {
+        display: flex;
+    }
+
+    .nav ul li {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Show the hamburger icon on mobile */
+    .hamburger {
+        display: flex;
+    }
+
+    /* --- Hero Section & Sponsors --- */
+    .hero-header {
+        /* Make the header take up more vertical space on mobile */
+        min-height: 90vh;
+    }
+
+    .hero-content h1 {
+        font-size: clamp(32px, 10vw, 48px); /* Adjust title size for mobile */
+    }
+
+    /* Adjust the sponsor section inside the header */
+    .sponsors-wrapper {
+        padding: 20px 0; /* Reduce padding */
+    }
+
+    .sponsor-header h2 {
+        font-size: 24px; /* Make sponsor title smaller */
+    }
+    
+    .sponsor-card {
+        width: 100%; /* Make sponsor cards full-width to stack vertically */
+        max-width: 320px; /* But not too wide on slightly larger screens */
+    }
+
+    /* --- Main Content --- */
+    
+    /* Stack the detail grids into a single column */
+    .detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .detail-section h2 {
+        font-size: 28px;
+    }
+
+    /* Adjust timeline for better readability */
+    .timeline-item {
+        padding-left: 50px;
+    }
+    
+    .timeline::before {
+        left: 15px;
+    }
+
+    .timeline-dot {
+        left: 0;
+        width: 30px;
+        height: 30px;
+    }
+}
+
+
+/* --- Small Mobile Devices (e.g., iPhone SE @ up to 480px) --- */
+@media (max-width: 480px) {
+
+    .hero-content p {
+        font-size: 16px; /* Make text more compact */
+    }
+
+    /* Further reduce padding for the smallest screens */
+    .sponsor-header p {
+        margin-bottom: 30px;
+    }
+
+    /* Make prize cards full-width */
+    .prize-cards {
+        gap: 20px;
+    }
+
+    .prize-card {
+        width: 100%;
+    }
+
+    .cta-section {
+        padding: 40px 20px;
+    }
+}
+    </style>
+</head>
+
+<body>
+
+
+    <nav class="nav">
+        <div class="container nav-inner">
+            <a class="brand" href="./index.html"><img src="./image/CPC-main - 96_Tasmin Hasan Fuwad (1).png"
+                    alt=""><span>Club Events</span></a>
+            <ul>
+                <li><a href="#events">Events</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+    <div class="floating-elements">
+        <div class="floating-element" style="width: 50px; height: 50px; top: 10%; left: 5%; animation-duration: 25s;">
+        </div>
+        <div class="floating-element"
+            style="width: 30px; height: 30px; top: 20%; left: 80%; animation-duration: 20s; animation-delay: -5s;">
+        </div>
+        <div class="floatzing-element"
+            style="width: 70px; height: 70px; top: 50%; left: 60%; animation-duration: 30s; animation-delay: -10s;">
+        </div>
+        <div class="floating-element"
+            style="width: 40px; height: 40px; top: 70%; left: 10%; animation-duration: 22s; animation-delay: -15s;">
+        </div>
+        <div class="floating-element"
+            style="width: 60px; height: 60px; top: 30%; left: 40%; animation-duration: 28s; animation-delay: -7s;">
+        </div>
+    </div>
+
+    <header class="hero-header">
+        <div class="hero-content">
+            <h1>Capture the Flag (CTF)</h1>
+            <p>🔓 The Vault is Open. Can You Capture The Flag? This isn't just a game. It's a battle of wits, strategy,
+                and skill.</p>
+            <!-- =======================
+     CENTERED SPONSORS SECTION
+     ======================= -->
+            <section class="section">
+                <div class="sponsors-wrapper">
+                    <!-- Section Title -->
+                    <div class="sponsor-header">
+                        <h2><i class="fas fa-handshake"></i> Partners & Sponsors</h2>
+                        <p>This event is made possible by the generous support of our partners.</p>
+                    </div>
+
+                    <!-- Sponsor Grid -->
+                    <div class="sponsors-grid">
+
+                        <!-- Sponsor Card 1: DSI -->
+                        <div class="sponsor-card">
+                            <p class="sponsor-role">Brought to you by</p>
+                            <img src="./image/DSI_logo.png" alt="DSI Logo" class="sponsor-logo dsi-logo">
+                        </div>
+
+                        <!-- Sponsor Card 2: Knight Squad -->
+                        <div class="sponsor-card">
+                            <p class="sponsor-role">Powered by</p>
+                            <img src="./image/ks_logo (2).png" alt="Knight Squad Logo" class="sponsor-logo">
+                        </div>
+
+                        <!-- Sponsor Card 3: Got My Host -->
+                        <div class="sponsor-card">
+                            <p class="sponsor-role">Hosting Partner</p>
+                            <img src="./image/Got host_logo.jpeg" alt="Got My Host Logo"
+                                class="sponsor-logo rounded-logo">
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+
+            <section class="section event-content">
+                <div class="detail-section">
+                    <h2><i class="fas fa-shield-halved"></i>Event Structure</h2>
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <h3>Rounds</h3>
+                            <p>Online Preliminary + On-site Final</p>
+                        </div>
+                        <div class="detail-item">
+                            <h3>Qualifier Duration</h3>
+                            <p>8 hours (Online)</p>
+                        </div>
+                        <div class="detail-item">
+                            <h3>Final Duration</h3>
+                            <p>5 hours (On-site)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail-section" style="margin-top: 50px;">
+                    <h2><i class="fas fa-user-secret"></i>Participant Details</h2>
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <h3>Team Size</h3>
+                            <p>4 Hackers</p>
+                        </div>
+                        <div class="detail-item">
+                            <h3>Registration Fee</h3>
+                            <p>FREE!</p>
+                        </div>
+                        <div class="detail-item">
+                            <h3>Slots</h3>
+                            <p>Top 40 teams from the online round advance to the onsite finale!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="schedule">
+                <div style="text-align: center; margin-bottom: 40px;">
+                    <h2><i class="fas fa-calendar-alt"></i>Event Timeline</h2>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"><i class="fas fa-globe"></i></div>
+                        <div class="timeline-content">
+                            <div class="timeline-time">Preliminary Round: September 20, 2025</div>
+                            <p class="timeline-description">An 8-hour online battle where teams from all over compete to
+                                secure their spot in the finals. (time to be announce)</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"><i class="fas fa-flag-checkered"></i></div>
+                        <div class="timeline-content">
+                            <div class="timeline-time">Onsite Finals: September 25, 2025</div>
+                            <p class="timeline-description">The top 40 teams face off in a 5-hour (09:00 AM to 03:00 PM)
+                                finale at the BUP Campus. The flag awaits!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section cta-section">
+                <h2>Ready to hack?</h2>
+                <p>Prove your elite skills and compete for glory. Great talent shouldn't have a paywall.</p>
+                <a href="https://forms.gle/QeD3BzxpArno8SoN9" class="cta-btn">Register Your Squad Now!</a>
+            </section>
+
+            <section class="section prizes">
+                <div style="text-align: center; margin-bottom: 40px;">
+                    <h2><i class="fas fa-trophy"></i>Prizes & Recognition</h2>
+                </div>
+                <!-- <div class="prize-cards">
+                    <div class="prize-card runner-up-1">
+                        <h3>1ST RUNNER UP</h3>
+                        <p class="amount">15,000 BDT</p>
+                    </div>
+                    <div class="prize-card champion">
+                        <h3>CHAMPION</h3>
+                        <p class="amount">20,000 BDT</p>
+                    </div>
+                    <div class="prize-card runner-up-2">
+                        <h3>2ND RUNNER UP</h3>
+                        <p class="amount">10,000 BDT</p>
+                    </div>
+                </div> -->
+                <h1>To Be Announce</h2>
+            </section>
+
+        </div>
+    </main>
+
+    <script>
+        // Floating elements script
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.floating-elements');
+            const numElements = 20;
+            for (let i = 0; i < numElements; i++) {
+                const el = document.createElement('div');
+                el.classList.add('floating-element');
+                const size = Math.random() * 150 + 20;
+                el.style.width = `${size}px`;
+                el.style.height = `${size}px`;
+                el.style.left = `${Math.random() * 100}%`;
+                el.style.top = `${Math.random() * 100 + 100}%`; // Start below viewport
+                el.style.animationDuration = `${Math.random() * 20 + 15}s`;
+                el.style.animationDelay = `${Math.random() * 10}s`;
+                container.appendChild(el);
+            }
+        });
+
+        // --- JAVASCRIPT FOR HAMBURGER MENU ---
+
+        // Select the hamburger icon and the navigation menu
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav ul');
+
+        // Add a click event listener to the hamburger icon
+        hamburger.addEventListener('click', () => {
+            // Toggle the 'active' class on both the icon and the menu
+            // This will trigger the CSS rules you just added to show/hide the menu
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Scroll animation script
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+
+</html>

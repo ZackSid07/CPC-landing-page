@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Contest Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./CSS/style.css">
+    <style>
+        :root {
+            --bg: #0b0f14;
+            --panel: #111822;
+            --panel-2: #0e1520;
+            --text: #ffffff;
+            --muted: #b0b6c0;
+            --accent: #5dd3ff;
+            --accent-2: #7c5cff;
+            --border: rgba(255, 255, 255, 0.15);
+            --shadow: 0 10px 30px rgba(0, 0, 0, .55);
+            --radius: 14px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, Roboto, Helvetica, Arial;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: min(1200px, 92vw);
+            margin-inline: auto;
+        }
+        
+        /* --- NAVIGATION --- */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(11, 15, 20, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .brand img {
+            height: 40px;
+        }
+
+        .nav ul {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+        
+        .nav ul a:hover {
+            color: var(--accent);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+        
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text);
+            transition: var(--transition);
+        }
+        
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+
+
+        .section {
+            padding: 80px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Floating Background Elements */
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            animation: float 25s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+            }
+
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+            }
+        }
+
+        /* Hero Header */
+        .hero-header {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding: 120px 20px 40px; /* Added top padding for nav */
+            background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'); /* Gaming-related background */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(11, 15, 20, 0.85) 0%, rgba(11, 15, 20, 0.95) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content h1 {
+            font-size: clamp(36px, 6vw, 60px);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(to right, var(--accent), var(--accent-2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            color: var(--muted);
+            max-width: 65ch;
+            margin-inline: auto;
+            margin-bottom: 30px;
+        }
+
+        /* --- CENTERED SPONSORS SECTION STYLING --- */
+        .sponsors-wrapper {
+            max-width: 1000px;
+            margin-inline: auto;
+            padding: 20px 0px;
+            text-align: center;
+        }
+        
+        .sponsors-grid {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .sponsor-card {
+            background: var(--panel-2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 25px;
+            width: 280px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .sponsor-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(93, 211, 255, 0.15);
+        }
+
+        .sponsor-card .sponsor-role {
+            text-transform: uppercase;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--muted);
+            letter-spacing: 0.8px;
+            margin-bottom: 15px;
+        }
+
+        .sponsor-card .sponsor-logo {
+            max-height: 60px;
+            width: auto;
+            max-width: 70%;
+            margin-inline: auto;
+            /* filter: invert(1); Invert DSI logo to fit dark theme */
+        }
+
+        /* --- Main Content Styling --- */
+        .event-content {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 40px;
+        }
+
+        .detail-section {
+            margin-bottom: 50px;
+        }
+        .detail-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .detail-section h2 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .detail-section h2 i {
+            color: var(--accent);
+            font-size: 28px;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .detail-item {
+            background: var(--panel-2);
+            padding: 25px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+        
+        .detail-item:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 0 25px rgba(93, 211, 255, 0.2);
+        }
+
+        .detail-item h3 {
+            font-size: 20px;
+            color: var(--accent-2);
+            margin-bottom: 10px;
+        }
+
+        .detail-item p, .detail-section p {
+            color: var(--muted);
+            font-size: 16px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            background: var(--panel);
+            padding: 50px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+        }
+        
+        .cta-section h2 {
+            margin-bottom: 15px;
+            font-size: 32px;
+            color: var(--text);
+        }
+
+        .cta-section p {
+            color: var(--muted);
+            margin-bottom: 30px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(to right, var(--accent), var(--accent-2));
+            color: var(--bg);
+            border-radius: var(--radius);
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: var(--transition);
+            min-width: 250px;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .section { padding: 60px 0; }
+            .nav ul {
+                display: none;
+                position: absolute;
+                top: 70px; /* Height of nav bar */
+                left: 0;
+                width: 100%;
+                background: var(--panel);
+                flex-direction: column;
+                padding: 20px 0;
+                text-align: center;
+            }
+            .nav ul.active { display: flex; }
+            .nav ul li { padding: 10px 0; }
+            .hamburger { display: flex; }
+            .hero-header { min-height: 80vh; }
+            .hero-content h1 { font-size: clamp(32px, 10vw, 48px); }
+            .sponsor-card { width: 100%; max-width: 320px; }
+            .detail-section h2 { font-size: 28px; }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-content p { font-size: 16px; }
+            .cta-section { padding: 40px 20px; }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <nav class="nav">
+        <div class="container nav-inner">
+             <a class="brand" href="./index.html"><img src="./image/CPC-main - 96_Tasmin Hasan Fuwad (1).png" alt=""><span>Club Events</span></a>
+            <ul>
+                <li><a href="#events">Events</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="floating-elements"></div>
+
+    <header class="hero-header">
+        <div class="hero-content">
+            <h1>Gaming Arena</h1>
+            <p>The controllers are charged, the keyboards are ready... it's time to settle the score! This is an INTRA-BUP EXCLUSIVE.</p>
+            
+             <div class="sponsors-wrapper">
+                <div class="sponsors-grid">
+                    <div class="sponsor-card">
+                        <p class="sponsor-role">Powered By</p>
+                        <!-- NOTE: Replace with the actual logo URL -->
+                        <img src="./image/DSI_logo.png" alt="DSI Logo" class="sponsor-logo">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="section event-content">
+                <!-- VALORANT TOURNAMENT -->
+                <div class="detail-section">
+                    <h2><i class="fa-solid fa-crosshairs"></i>Valorant Tournament</h2>
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <h3>Format</h3>
+                            <p>Online Group Stage (16 slots) → Onsite Finals (4 teams)</p>
+                        </div>
+                        <div class="detail-item">
+                            <h3>Team Size</h3>
+                            <p>5 Main Players + 2 Subs</p>
+                        </div>
+                        <div class="detail-item">
+                            <h3>Registration Fee</h3>
+                            <p>৳800 per team</p>
+                        </div>
+                        <div class="detail-item">
+                            <h3>Requirement</h3>
+                            <p>Players must bring their own gadgets for the onsite finals.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- FC 25 TOURNAMENT -->
+                <div class="detail-section">
+                    <h2><i class="fa-solid fa-futbol"></i>FC 25 Tournament</h2>
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <h3>Game</h3>
+                            <p>FC 25</p>
+                        </div>
+                        <div class="detail-item">
+                            <h3>Format</h3>
+                            <p>Single Elimination, Full Offline</p>
+                        </div>
+                        <div class="detail-item">
+                            <h3>Registration Fee</h3>
+                            <p>৳150 per player</p>
+                        </div>
+                        <div class="detail-item">
+                            <h3>Requirement</h3>
+                            <p>Players must bring their own controller.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PRIZE POOL -->
+                <div class="detail-section">
+                    <h2><i class="fas fa-trophy"></i>Prize Pool</h2>
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <h3>Stay Tuned!</h3>
+                            <p>The exciting prize pools for both Valorant and FC 25 will be announced very soon! Get ready! 👀</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section cta-section">
+                <h2>For Glory, For Bragging Rights</h2>
+                <p>Prove your squad is the best in all of BUP. Secure your slot before it's gone!</p>
+                <div class="cta-buttons">
+                    <a href="https://forms.gle/VR8dhhZ3Q1q7F29FA" class="cta-btn">Register For Valorant</a>
+                    <a href="[Insert FC25 Registration Link Here]" class="cta-btn">Register For FC 25</a>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.floating-elements');
+            const numElements = 20;
+            for (let i = 0; i < numElements; i++) {
+                const el = document.createElement('div');
+                el.classList.add('floating-element');
+                const size = Math.random() * 150 + 20;
+                el.style.width = `${size}px`;
+                el.style.height = `${size}px`;
+                el.style.left = `${Math.random() * 100}%`;
+                el.style.top = `${Math.random() * 100 + 100}%`;
+                el.style.animationDuration = `${Math.random() * 20 + 15}s`;
+                el.style.animationDelay = `${Math.random() * 10}s`;
+                container.appendChild(el);
+            }
+
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav ul');
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+
+            const sections = document.querySelectorAll('.section');
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+
+</html>
