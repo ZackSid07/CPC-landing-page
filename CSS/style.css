@@ -593,10 +593,11 @@ img {
 }
 
 .about-image img {
+    position: flex;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
 }
-
+/*
 .about-image::before {
     content: '';
     position: absolute;
@@ -609,13 +610,13 @@ img {
     z-index: -1;
     opacity: 0.5;
     transition: var(--transition);
-}
+}*/
 
-.about-image:hover::before {
+/*.about-image:hover::before {
     top: 0;
     left: 0;
 }
-
+*/
 .contact-info {
     display: flex;
     flex-direction: column;
